@@ -17,13 +17,13 @@ namespace Review.Domain.Services
         /// <param name="id">Id отзыва</param>
         /// <param name="productId">Id продукта</param>
         /// <returns></returns>
-        Task<IEnumerable<Feedback?>> GetReviewAsync(int id, int productId);
+        Task<IEnumerable<Feedback?>> GetFeedbackAsync(int id);
 
         /// <summary>
         /// Удаление отзыва
         /// </summary>
         /// <param name="id">Id отзыва</param>
         /// <returns></returns>
-        Task<bool> TryToDeleteReviewAsync(int id);
+        Task<bool> TryToDeleteFeedbackAsync(int id);
     }
 }

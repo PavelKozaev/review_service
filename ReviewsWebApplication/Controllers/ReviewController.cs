@@ -25,11 +25,11 @@ namespace ReviewsWebApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetFeedbacksByProductId")]
-        public async Task<ActionResult<List<Feedback>>> GetAllReviewsAsync(int id)
+        public async Task<ActionResult<List<Feedback>>> GetAllFeedbacksAsync(int productId)
         {
             try
             {
-                var result = await reviewService.GetFeedbacksByProductIdAsync(id);
+                var result = await reviewService.GetFeedbacksByProductIdAsync(productId);
                 return Ok(result);
             }
             catch (Exception e)
@@ -43,12 +43,12 @@ namespace ReviewsWebApplication.Controllers
         /// Получение отзыва
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetReview")]
-        public async Task<ActionResult<List<Feedback>>> GetReviewAsync(int feedbackId, int productId)
+        [HttpGet("GetFeedback")]
+        public async Task<ActionResult<List<Feedback>>> GetFeedbackAsync(int feedbackId)
         {
             try
             {
-                var result = await reviewService.GetReviewAsync(feedbackId, productId);
+                var result = await reviewService.GetFeedbackAsync(feedbackId);
                 return Ok(result);
             }
             catch (Exception e)
@@ -63,12 +63,12 @@ namespace ReviewsWebApplication.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize]
-        [HttpDelete("DeleteReview")]
-        public async Task<ActionResult<List<Feedback>>> DeleteReviewAsync(int id)
+        [HttpDelete("DeleteFeedback")]
+        public async Task<ActionResult<List<Feedback>>> DeleteFeedbackAsync(int feedbackId)
         {
             try
             {
-                var result = await reviewService.TryToDeleteReviewAsync(id);
+                var result = await reviewService.TryToDeleteFeedbackAsync(feedbackId);
                 if(result)
                     return Ok();
                 return BadRequest(result);
