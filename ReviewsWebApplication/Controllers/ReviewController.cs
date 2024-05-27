@@ -62,7 +62,7 @@ namespace ReviewsWebApplication.Controllers
         /// Удаление отзыва по id
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        
         [HttpDelete("DeleteFeedback")]
         public async Task<ActionResult<List<Feedback>>> DeleteFeedbackAsync(int feedbackId)
         {
