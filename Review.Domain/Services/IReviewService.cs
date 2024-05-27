@@ -24,5 +24,6 @@ namespace Review.Domain.Services
         /// <param name="id">Id отзыва</param>
         /// <returns></returns>
         Task<bool> TryToDeleteFeedbackAsync(int id);
+        Task<bool> AddFeedbackAsync(int productId, int userId, string text, int grade);
     }
 }

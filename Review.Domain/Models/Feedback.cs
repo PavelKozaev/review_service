@@ -39,6 +39,6 @@
 
         public Rating Rating { get; set; }
 
-        public Status status { get; set; }
+        public Status Status { get; set; }
     }
 }

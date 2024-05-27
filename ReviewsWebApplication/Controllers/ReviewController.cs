@@ -79,5 +79,25 @@ namespace ReviewsWebApplication.Controllers
                 return BadRequest(new { Error = e.Message });
             }
         }
+
+        /// <summary>
+        /// Добавление отзыва
+        /// </summary>
+        /// <returns></returns>
+
+        [HttpPost("AddFeedback")]
+        public async Task<ActionResult<List<Feedback>>> AddFeedbackAsync(int productId, int userId, string text, int grade)
+        {
+            try
+            {
+                var result = await reviewService.AddFeedbackAsync(productId, userId, text, grade);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message, e);
+                return BadRequest(new { Error = e.Message });
+            }
+        }
     }
 }
