@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Review.Domain.Models
+﻿namespace Review.Domain.Models
 {
     public enum Status
     {
@@ -13,5 +7,4 @@ namespace Review.Domain.Models
         Actual = 1,
         Deleted = 2
     }
-
 }

@@ -15,7 +15,6 @@ namespace Review.Domain.Services
         /// Получение все отзывов по продукту
         /// </summary>
         /// <param name="id">Id отзыва</param>
-        /// <param name="productId">Id продукта</param>
         /// <returns></returns>
         Task<IEnumerable<Feedback?>> GetFeedbackAsync(int id);
 
