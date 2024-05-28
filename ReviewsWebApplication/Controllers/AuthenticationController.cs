@@ -13,10 +13,10 @@ namespace ReviewsWebApplication.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly ILogger<ReviewController> _logger;
+        private readonly ILogger<ReviewsController> _logger;
         private readonly LoginService loginService;
 
-        public AuthenticationController(ILogger<ReviewController> logger, LoginService loginService)
+        public AuthenticationController(ILogger<ReviewsController> logger, LoginService loginService)
         {
             _logger = logger;
             this.loginService = loginService;

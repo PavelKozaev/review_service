@@ -15,10 +15,7 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddControllers().AddJsonOptions(options =>
-        {
-            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());            
-        });
+        builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
@@ -52,7 +49,7 @@ internal class Program
         });
         var connectionString = builder.Configuration.GetConnectionString("Review_Database");
         builder.Services.AddDbContext<DataBaseContext>(x => x.UseSqlServer(connectionString));
-        builder.Services.AddScoped<IReviewService, ReviewService>();
+        builder.Services.AddScoped<IReviewsService, ReviewsService>();
         builder.Services.AddScoped<ICacheService, CacheService>();
         builder.Services.AddScoped<LoginService>();
         builder.Services.AddAuthentication(opt => {
