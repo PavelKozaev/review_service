@@ -27,8 +27,7 @@ namespace Review.Domain.Helper
                 Grade = random.Next(0, 6),
                 ProductId = random.Next(1, 10),
                 Text = loremIpsum.Substring(0, random.Next(20, 100)),
-                UserId = random.Next(1, 10), 
-                RatingId = random.Next(1, 10),
+                UserId = random.Next(1, 10),                 
                 Status = (Status)random.Next(0, 2)
             };
         }
@@ -61,6 +60,18 @@ namespace Review.Domain.Helper
                 Grade = Math.Round(reviewsAverage, 2)
             };
             return rating;
+        }
+
+        public static void AssignRatingsToReviews(List<Models.Review> reviews, List<Rating> ratings)
+        {            
+            foreach (var review in reviews)
+            {
+                var rating = ratings.FirstOrDefault(r => r.ProductId == review.ProductId);
+                if (rating != null)
+                {
+                    review.RatingId = rating.Id; 
+                }
+            }
         }
 
         public static Login[] SetLogins()

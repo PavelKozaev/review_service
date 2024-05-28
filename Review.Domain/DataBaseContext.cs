@@ -25,9 +25,12 @@ namespace Review.Domain
 
             var reviews = Initialization.SetReviews();
             var ratings = Initialization.SetRatings(reviews);
+            Initialization.AssignRatingsToReviews(reviews, ratings);
 
             modelBuilder.Entity<Models.Review>().HasData(reviews);
             modelBuilder.Entity<Rating>().HasData(ratings);
+
+
 
             Login[] login = Initialization.SetLogins();
             modelBuilder.Entity<Login>().HasData(login);
