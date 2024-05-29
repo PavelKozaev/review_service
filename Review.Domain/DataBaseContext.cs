@@ -6,8 +6,6 @@ namespace Review.Domain
 {
     public class DataBaseContext: DbContext
     {
-
-        public DbSet<Rating> Ratings { get; set; }
         public DbSet<Models.Review> Reviews { get; set; }
         public DbSet<Login> Logins { get; set; }
         public DataBaseContext(DbContextOptions<DataBaseContext> options): base(options)
@@ -17,23 +15,11 @@ namespace Review.Domain
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Models.Review>()
-                .HasOne(p => p.Rating)
-                .WithMany(t => t.Reviews)
-                .HasForeignKey(p => p.RatingId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            var reviews = Initialization.SetReviews();
-            var ratings = Initialization.SetRatings(reviews);
-            Initialization.AssignRatingsToReviews(reviews, ratings);
-
+            var reviews = Initialization.SetReviews();      
             modelBuilder.Entity<Models.Review>().HasData(reviews);
-            modelBuilder.Entity<Rating>().HasData(ratings);
 
-
-
-            Login[] login = Initialization.SetLogins();
-            modelBuilder.Entity<Login>().HasData(login);
+            Login[] logins = Initialization.SetLogins();
+            modelBuilder.Entity<Login>().HasData(logins);
         }
     }
 }

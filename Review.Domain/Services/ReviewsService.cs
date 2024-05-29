@@ -10,29 +10,22 @@ namespace Review.Domain.Services
         public ReviewsService(DataBaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-        }
+        }                
 
-        public async Task<List<Models.Review>> GetAll()
-        {
-            return await databaseContext.Reviews.ToListAsync();
-        }
-
-        public async Task<List<Models.Review>> GetByProductIdAsync(int productId)
+        public async Task<List<Models.Review>> GetByProductIdAsync(Guid productId)
         {
             return await databaseContext.Reviews.Where(x => x.ProductId == productId && x.Status != Status.Deleted).ToListAsync();
-        }
+        }        
 
-        public async Task<IEnumerable<Models.Review?>> GetAsync(int reviewId)
-        {
-            return await databaseContext.Reviews.Where(x => x.Id == reviewId).ToListAsync();
-        }
-
-        public async Task<bool> TryToDeleteAsync(int reviewId)
+        public async Task<bool> TryToDeleteAsync(Guid reviewId)
         {
             try
             {
                 var review = await databaseContext.Reviews.FirstOrDefaultAsync(x => x.Id == reviewId);
-                databaseContext.Reviews.Remove(review!);
+                if (review != null)
+                {
+                    review.Status = Status.Deleted;
+                }                
                 await databaseContext.SaveChangesAsync();
                 return true;
             }

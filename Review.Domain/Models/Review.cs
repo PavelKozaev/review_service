@@ -8,17 +8,17 @@
         /// <summary>
         /// Id отзыва
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Id продукта
         /// </summary>
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
         /// <summary>
         /// Id пользователя, оставившего отзыв
         /// </summary>
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         /// <summary>
         /// Текст отзыва
@@ -31,14 +31,18 @@
         public int Grade { get; set; }
 
         /// <summary>
+        /// Рейтинг
+        /// </summary>
+        public double Rating { get; set; }
+
+        /// <summary>
         /// Дата создания
         /// </summary>
         public DateTime CreateDate { get; set; }
-
-        public int RatingId { get; set; }
-
-        public Rating Rating { get; set; }
-
+                
+        /// <summary>
+        /// Статус
+        /// </summary>
         public Status Status { get; set; }
     }
 }
