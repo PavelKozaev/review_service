@@ -8,31 +8,19 @@ namespace Review.Domain.Helper
         public static List<Models.Review> SetReviews()
         {
             var reviewCount = 100;
-            var random = new Random();
             var reviews = new List<Models.Review>(reviewCount);
-            var productRatings = new Dictionary<Guid, double>();
-            var productIds = Enumerable.Range(0, 10).Select(_ => Guid.NewGuid()).ToArray(); // 10 уникальных ProductId
+            var random = new Random();
+            var productIds = Enumerable.Range(0, 10).Select(_ => Guid.NewGuid()).ToArray();
 
             for (int i = 0; i < reviewCount; i++)
             {
-                Models.Review review = CreateReview(random, productIds[random.Next(productIds.Length)]); // Выбор случайного ProductId
+                Models.Review review = CreateReview(random, productIds[random.Next(productIds.Length)]);
                 reviews.Add(review);
-            }
-
-            var groupedByProduct = reviews.GroupBy(review => review.ProductId);
-
-            foreach (var group in groupedByProduct)
-            {
-                var averageRating = group.Average(r => r.Grade);
-                // Присваивание среднего рейтинг
-                foreach (var review in group)
-                {
-                    review.Rating = Math.Round(averageRating, 2); // Округляю рейтинг до двух десятичных знаков и обновляю его
-                }
             }
 
             return reviews;
         }
+
 
         public static Models.Review CreateReview(Random random, Guid productId)
         {
@@ -43,8 +31,8 @@ namespace Review.Domain.Helper
                 UserId = Guid.NewGuid(),
                 Text = loremIpsum.Substring(0, random.Next(20, 100)),
                 Grade = random.Next(1, 6), 
-                CreateDate = DateTime.Now.AddDays(random.Next(-100, 1)),                             
-                Status = (Status)random.Next(0, 3) 
+                CreateDate = DateTime.Now.AddDays(random.Next(-100, 0)),                             
+                Status = (Status)random.Next(1, 3) 
             };
         }
 

@@ -6,18 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ReviewsWebApplication-21B70C0C-302C-4A0A-89A4-95EEABEF2BC4</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Data\**" />
-    <Compile Remove="Servises\**" />
-    <Content Remove="Data\**" />
-    <Content Remove="Servises\**" />
-    <EmbeddedResource Remove="Data\**" />
-    <EmbeddedResource Remove="Servises\**" />
-    <None Remove="Data\**" />
-    <None Remove="Servises\**" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.16" />

@@ -17,7 +17,7 @@ namespace Review.Domain.Services
             return await databaseContext.Reviews.Where(x => x.ProductId == productId && x.Status != Status.Deleted).ToListAsync();
         }        
 
-        public async Task<bool> TryToDeleteAsync(Guid reviewId)
+        public async Task<bool> TryDeleteAsync(Guid reviewId)
         {
             try
             {
@@ -33,6 +33,13 @@ namespace Review.Domain.Services
             {
                 return false;
             }
-        }        
+        }
+
+        public async Task<string> GetRatingByProductIdAsync(Guid productId)
+        {
+            var reviews = await databaseContext.Reviews.Where(x => x.ProductId == productId && x.Status != Status.Deleted).ToListAsync();
+            var productRating = reviews.Average(x => (double)x.Grade);
+            return productRating.ToString("0.00");
+        }
     }
 }

@@ -14,6 +14,13 @@
         /// </summary>
         /// <param name="reviewId">Id отзыва</param>
         /// <returns></returns>
-        Task<bool> TryToDeleteAsync(Guid reviewId);
+        Task<bool> TryDeleteAsync(Guid reviewId);
+
+        /// <summary>
+        /// Получение рейтинга продукта
+        /// </summary>
+        /// <param name="productId">Id продукта</param>
+        /// <returns></returns>
+        Task<string> GetRatingByProductIdAsync(Guid productId);
     }
 }

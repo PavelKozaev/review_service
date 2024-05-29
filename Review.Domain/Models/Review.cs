@@ -29,12 +29,7 @@
         /// Оценка (количество звезд)
         /// </summary>
         public int Grade { get; set; }
-
-        /// <summary>
-        /// Рейтинг
-        /// </summary>
-        public double Rating { get; set; }
-
+                
         /// <summary>
         /// Дата создания
         /// </summary>
