@@ -21,6 +21,6 @@
         /// </summary>
         /// <param name="productId">Id продукта</param>
         /// <returns></returns>
-        Task<string> GetRatingByProductIdAsync(Guid productId);
+        Task<(double averageGrade, int reviewsCount)> GetRatingByProductIdAsync(Guid productId);
     }
 }

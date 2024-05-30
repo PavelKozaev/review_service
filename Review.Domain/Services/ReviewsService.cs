@@ -10,22 +10,26 @@ namespace Review.Domain.Services
         public ReviewsService(DataBaseContext databaseContext)
         {
             this.databaseContext = databaseContext;
-        }                
+        }
 
         public async Task<List<Models.Review>> GetByProductIdAsync(Guid productId)
         {
-            return await databaseContext.Reviews.Where(x => x.ProductId == productId && x.Status != Status.Deleted).ToListAsync();
-        }        
+            return await databaseContext.Reviews.
+                Where(x => x.ProductId == productId && x.Status != Status.Deleted).
+                ToListAsync();
+        }
 
         public async Task<bool> TryDeleteAsync(Guid reviewId)
         {
             try
             {
                 var review = await databaseContext.Reviews.FirstOrDefaultAsync(x => x.Id == reviewId);
+
                 if (review != null)
                 {
                     review.Status = Status.Deleted;
-                }                
+                }
+
                 await databaseContext.SaveChangesAsync();
                 return true;
             }
@@ -35,11 +39,22 @@ namespace Review.Domain.Services
             }
         }
 
-        public async Task<string> GetRatingByProductIdAsync(Guid productId)
+        public async Task<(double averageGrade, int reviewsCount)> GetRatingByProductIdAsync(Guid productId)
         {
-            var reviews = await databaseContext.Reviews.Where(x => x.ProductId == productId && x.Status != Status.Deleted).ToListAsync();
-            var productRating = reviews.Average(x => (double)x.Grade);
-            return productRating.ToString("0.00");
+            var reviews = await databaseContext.Reviews
+                .Where(x => x.ProductId == productId && x.Status != Status.Deleted)
+                .ToListAsync();
+
+            // Если нет отзывов, возвращаю кортеж с нулевыми значениями.
+            if (!reviews.Any())
+                return (0, 0);
+
+            var averageGrade = reviews.Average(x => x.Grade);            
+            averageGrade = Math.Round(averageGrade, 2); // Округляю до двух десятичных знаков
+
+            var reviewsCount = reviews.Count;
+
+            return (averageGrade, reviewsCount);
         }
     }
 }

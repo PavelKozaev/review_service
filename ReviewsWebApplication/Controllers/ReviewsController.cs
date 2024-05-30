@@ -71,12 +71,20 @@ namespace ReviewsWebApplication.Controllers
         /// <param name="productId">Id продукта</param>
         /// <returns></returns>
         [HttpGet("{productId}")]
-        public async Task<ActionResult<string>> GetRatingByProductIdAsync(Guid productId)
+        public async Task<ActionResult<RatingApiModel>> GetRatingByProductIdAsync(Guid productId)
         {
             try
             {
-                string result = await reviewsService.GetRatingByProductIdAsync(productId);
-                return Ok(result);
+                var (averageGrade, reviewsCount) = await reviewsService.GetRatingByProductIdAsync(productId);
+
+                var rating = new RatingApiModel
+                {                    
+                    ProductId = productId,
+                    AverageGrade = averageGrade,
+                    ReviewsCount = reviewsCount
+                };
+
+                return Ok(rating);
             }
             catch (Exception e)
             {

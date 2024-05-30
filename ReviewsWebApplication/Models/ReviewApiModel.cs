@@ -7,7 +7,6 @@
         public Guid UserId { get; set; }
         public string? Text { get; set; }
         public int Grade { get; set; }
-        public DateTime CreateDate { get; set; }
-        public string Status { get; set; }
+        public DateTime CreateDate { get; set; }        
     }
 }

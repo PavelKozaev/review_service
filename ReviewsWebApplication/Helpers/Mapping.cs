@@ -23,8 +23,7 @@ namespace ReviewsWebApplication.Helpers
                 UserId = review.UserId,
                 Text = review.Text,
                 CreateDate = review.CreateDate,
-                Grade = review.Grade,
-                Status = EnumHelper.GetDisplayName(review.Status)                
+                Grade = review.Grade                              
             };
         }
     }
