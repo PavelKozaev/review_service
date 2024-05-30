@@ -49,12 +49,30 @@ namespace Review.Domain.Services
             if (!reviews.Any())
                 return (0, 0);
 
-            var averageGrade = reviews.Average(x => x.Grade);            
+            var averageGrade = reviews.Average(x => x.Grade);
             averageGrade = Math.Round(averageGrade, 2); // Округляю до двух десятичных знаков
 
             var reviewsCount = reviews.Count;
 
             return (averageGrade, reviewsCount);
+        }
+
+        public async Task<Models.Review> CreateAsync(Guid productId, Guid userId, string? text, int grade)
+        {
+
+            var review = new Models.Review
+            {
+                ProductId = productId,
+                UserId = userId,
+                Text = text,
+                Grade = grade,
+                CreateDate = DateTime.UtcNow,
+                Status = Status.Actual,
+            };
+
+            await databaseContext.Reviews.AddAsync(review!);
+            await databaseContext.SaveChangesAsync();
+            return review;
         }
     }
 }

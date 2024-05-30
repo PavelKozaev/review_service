@@ -22,5 +22,15 @@
         /// <param name="productId">Id продукта</param>
         /// <returns></returns>
         Task<(double averageGrade, int reviewsCount)> GetRatingByProductIdAsync(Guid productId);
+
+        /// <summary>
+        /// Добавление нового отзыва
+        /// </summary>
+        /// <param name="productId">Id продукта</param>
+        /// <param name="userId">Id пользователя</param>
+        /// <param name="text">Текст отзыва</param>
+        /// <param name="grade">Оценка</param>
+        /// <returns></returns>
+        Task<Models.Review> CreateAsync(Guid productId, Guid userId, string? text, int grade);
     }
 }
