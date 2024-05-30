@@ -32,8 +32,8 @@ namespace ReviewsWebApplication.Controllers
             try
             {
                 var result = await reviewsService.GetByProductIdAsync(productId);
-                result.ToReviewApiModels();
-                return Ok(result);
+                var reviewApiModel = result.ToReviewApiModels();
+                return Ok(reviewApiModel);
             }
             catch (Exception e)
             {
