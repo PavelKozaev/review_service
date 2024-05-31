@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Review.Domain.Services;
 using ReviewsWebApplication.Helpers;
@@ -47,7 +46,7 @@ namespace ReviewsWebApplication.Controllers
         /// </summary>
         /// <param name="reviewId">Id продукта</param>
         /// <returns></returns>
-        [Authorize]
+        
         [HttpDelete("{reviewId}")]
         public async Task<ActionResult<bool>> DeleteAsync(Guid reviewId)
         {
@@ -102,13 +101,12 @@ namespace ReviewsWebApplication.Controllers
         /// <param name="grade">ќценка</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<ReviewApiModel>> CreateAsync(Guid productId, Guid userId, string text, int grade)
+        public async Task<ActionResult<ReviewApiModel>> CreateAsync([FromBody] ReviewApiModel review)
         {
             try
             {
-                var result = await reviewsService.CreateAsync(productId, userId, text, grade);
-                var reviewApiModel = result.ToReviewApiModel();
-                return Ok(reviewApiModel);
+                var result = await reviewsService.CreateAsync(review.ProductId, review.UserId, review.Text, review.Grade);                
+                return Ok(result);
             }
             catch (Exception e)
             {
