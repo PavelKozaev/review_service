@@ -21,33 +21,18 @@ namespace Review.Domain.Helper
             return reviews;
         }
 
-
         public static Models.Review CreateReview(Random random, Guid productId)
         {
             return new Models.Review()
             {
                 Id = Guid.NewGuid(),
-                ProductId = productId, // Использую переданный ProductId
+                ProductId = productId, 
                 UserId = Guid.NewGuid(),
                 Text = loremIpsum.Substring(0, random.Next(20, 100)),
                 Grade = random.Next(1, 6), 
                 CreateDate = DateTime.Now.AddDays(random.Next(-100, 0)),                             
                 Status = (Status)random.Next(1, 3) 
             };
-        }
-
-
-        public static Login[] SetLogins()
-        {
-            var logins = new List<Login>();
-            var admin = new Login()
-            {  
-                Id = 1,
-                UserName = "admin", 
-                Password = "admin" 
-            };
-            logins.Add(admin);
-            return logins.ToArray();
         }
     }
 }
