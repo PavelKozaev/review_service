@@ -15,6 +15,7 @@
 - Entity Framework Core 
 - MSSQL
 - AutoMapper
+- Swagger
 
 ## Установка и запуск
 
